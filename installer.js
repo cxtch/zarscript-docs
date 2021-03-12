@@ -6,7 +6,7 @@ let user = process.env['USERPROFILE'].split('\\');
 let home = user[user.length - 1];
 let globalPath = `${findHomeDir()}node_modules/@types/node/globals.d.ts`
 let docs = []
-let newSize = 40165
+let newSize = 40186
 let uninstallSize = 22203
 process.title = 'Zarscript Api Installer'
 process.stdout.write(`
