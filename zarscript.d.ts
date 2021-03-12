@@ -1,5 +1,5 @@
-interface PlayerPosition {
-  [index: number]: number
+interface PlayerPosition extends Array<number> {
+
 }
 interface LocalPlayer {
   /**Returns if the player can see the entity based on the entity ID */
@@ -111,7 +111,7 @@ interface LocalPlayer {
    */
   getTicksExisted(): number
 }
-interface BoundingBox {
+interface BoundingBox extends Array<Number> {
   [index: number]: number
 }
 interface Entity {
