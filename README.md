@@ -1,5 +1,5 @@
 # zarscript-docs
-## PreRequisites
+## Dependencies
 Make sure you have @types/node installed with npm. If you don't have that or are not sure what that is, install with
 ``npm install --save @types/node``
 ## Installation
