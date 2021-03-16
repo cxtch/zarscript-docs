@@ -5,11 +5,14 @@ const FS = require('fs')
 let user = process.env['USERPROFILE'].split('\\');
 let home = user[user.length - 1];
 let globalPath = `${findHomeDir()}node_modules/@types/node/globals.d.ts`
-let docs = []
-let newSize = 40176
-let uninstallSize = 22193
-process.title = 'Zarscript Api Installer'
-process.stdout.write(`
+
+fs.readFile(globalPath)
+  .catch(err => {
+    console.log('You do not have @types/node installed! please use "npm install --save @types/node" before installing zarscript documentation')
+    process.exit()
+  })
+  .then(() => {
+    process.stdout.write(`
 ███████╗█████╗██████╗███████╗████████████╗████████╗████████╗
 ╚══███╔██╔══████╔══████╔════██╔════██╔══██████╔══██╚══██╔══╝
   ███╔╝█████████████╔█████████║    ██████╔████████╔╝  ██║   
@@ -18,7 +21,16 @@ process.stdout.write(`
 ╚══════╚═╝  ╚═╚═╝  ╚═╚══════╝╚═════╚═╝  ╚═╚═╚═╝       ╚═╝    
                                                           
 `)
-console.log(`install or uninstall? [0/1]`)
+    fs.stat(globalPath)
+      .then(stats => {
+        console.log(`current file size of globals.d.ts is ${stats.size}`);
+        console.log('install[0] or uninstall?[1]')
+      })
+  })
+let docs = []
+let newSize = 41655
+let uninstallSize = 23691
+process.title = 'Zarscript Api Installer'
 
 function getZarDocs() {
   let text = '';
@@ -52,7 +64,7 @@ function checkForFault() {
     let globalFile = FS.statSync(globalPath)
     if (globalFile.size != newSize) {
       console.log(`FAULTY INSTALLATION: the target file's size is ${globalFile.size}, the expected size is ${newSize}`)
-      console.log(`Please run uninstall.js and try again`)
+      console.log(`Please uninstall and try again`)
     } else
       console.log('installation successful!')
     process.exit()
